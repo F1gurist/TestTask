@@ -15,12 +15,24 @@ class _MyAppState extends State<MyApp> {
   final Random _random = Random();
 
   Color _color = Color(0xFFFFFFFF);
+  Color _colorText = Color(0xFF1105B4);
 
   int _counter = 0;
 
   void changeColor() {
     setState(() {
       _color = Color.fromARGB(
+        _random.nextInt(256),
+        _random.nextInt(256),
+        _random.nextInt(256),
+        _random.nextInt(256),
+      );
+    });
+  }
+
+  void changeTextColor() {
+    setState(() {
+      _colorText = Color.fromARGB(
         _random.nextInt(256),
         _random.nextInt(256),
         _random.nextInt(256),
@@ -52,8 +64,16 @@ class _MyAppState extends State<MyApp> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'You have pushed the button this many times:',
+                  ElevatedButton(
+                    child: Text(
+                      'You have pushed the button this many times:',
+                      style: TextStyle(
+                        color: _colorText,
+                      ),
+                    ),
+                    onPressed: () {
+                      changeTextColor();
+                    },
                   ),
                   Text(
                     '$_counter',
